@@ -1,0 +1,18 @@
+---
+- hosts : localhost
+  tasks:
+          - name: Define variable in task.
+            shell: read -r BUILD_LATEST < filename.txt &&  echo $BUILD_LATEST
+            register : BUILD_LATEST
+          - debug:
+              var: BUILD_LATEST.stdout_lines[0]
+          - file:
+             path: /Users/Ashish/apache-tomcat/apache-tomcat-8.5.24/webapps/webapps/Counter
+             state: absent
+             name: "remove existing extracted war"
+          - get_url:
+             dest: /Users/Ashish/apache-tomcat/apache-tomcat-8.5.24/webapps/CounterWebApp.war
+             force: true
+             url: "{{ BUILD_LATEST.stdout_lines[0]}}"
+          - name: copy the war file to docker tomcat webapps folder in container id 525041e8afa2
+            shell: docker cp /Users/Ashish/apache-tomcat/apache-tomcat-8.5.24/webapps/CounterWebApp.war 68e0492b280c:/usr/local/tomcat/webapps 
