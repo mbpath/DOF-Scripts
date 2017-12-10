@@ -1,0 +1,43 @@
+# Check the version of docker installed
+$ docker --version
+Docker version 17.03.0-ce, build 60ccb22
+
+# Check the docker-compose version
+$ docker-compose --version
+docker-compose version 1.11.2, build dfed245
+
+# run an image
+$ docker run hello-world
+
+# Remove an image
+$ docker rmi <image name> or <image id first 3 digits>
+
+# To manually pull an image, for e.g. tomcat
+$ docker pull tomcat
+
+# For specific version:
+$ docker pull tomcat:8
+
+# To run tomcat use:
+$ docker run -it -p 8888:8080 tomcat bash
+
+# To start an existing container which is stopped
+$ docker start <container-name/ID>
+
+# To stop a running container
+$ docker stop <container-name/ID>
+
+# Then to login to the interactive shell of a container
+$ docker exec -it <container-name/ID> bash
+
+# To see list of **ALL** docker containers 
+$ docker ps -a
+
+# To see list of only running docker containers 
+$ docker ps
+
+# To remove one of the existing containers
+$ docker rm <container id> or <name>
+
+# To launch one of the existing containers
+$ docker exec -ti <container id> bash
